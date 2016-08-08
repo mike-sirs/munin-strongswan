@@ -1,0 +1,17 @@
+# Small munin plugin to monitor StrongSwan server
+# a few basic steps
+
+apt-get install munin-node ruby ruby-dev
+gem install vici --no-rdoc --no-ri
+
+# Insert ip address of you munin server (replace ^0\.0\.0\.0$)
+echo 'allow ^0\.0\.0\.0$' >> /etc/munin/munin-node.conf
+
+echo '[munin_strongswan_*]' >> /etc/munin/plugin-conf.d/munin-node
+echo 'user root' >> /etc/munin/plugin-conf.d/munin-node
+
+cd /etc/munin/plugins
+
+git clone https://github.com/undead-osiris/munin-strongswan.git
+
+service munin-node restart

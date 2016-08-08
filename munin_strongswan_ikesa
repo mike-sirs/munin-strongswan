@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'yaml'
+require "vici"
+require "socket"
+
+# By default socket path "/var/run/charon.vici"
+# Vici::Connection.new(UNIXSocket.new("/var/run/charon.vici"))
+sock = Vici::Connection.new()
+
+stats_json = sock.stats
+
+puts "graph_title Strongswan ipsec ikesas"
+puts "graph_category ipsec"
+puts "graph_vlabel ike established"
+puts "graph_info This graph monitors the ikesas rate"
+
+puts "ikesa_total.label IKESA_total"
+puts "ikesa_total.min 0"
+puts "ikesa_total.draw AREA"
+
+puts "ikesa_half_open.label IKESA_half_open"
+puts "ikesa_half_open.min 0"
+puts "ikesa_half_open.draw AREA"
+
+puts "ikesa_total.value #{stats_json["ikesas"]["total"]}"
+puts "ikesa_half_open.value #{stats_json["ikesas"]["half-open"]}"
