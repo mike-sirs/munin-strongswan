@@ -12,6 +12,7 @@ echo 'user root' >> /etc/munin/plugin-conf.d/munin-node
 
 cd /etc/munin/plugins
 
-git clone https://github.com/undead-osiris/munin-strongswan.git
+git clone https://github.com/undead-osiris/munin-strongswan.git /tmp/munin-strongswan/
+cp /tmp/munin-strongswan/munin_strongswan_* /etc/munin/plugins/
 
 service munin-node restart
