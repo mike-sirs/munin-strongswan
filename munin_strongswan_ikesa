@@ -26,3 +26,5 @@ puts "ikesa_half_open.draw AREA"
 
 puts "ikesa_total.value #{stats_json["ikesas"]["total"]}"
 puts "ikesa_half_open.value #{stats_json["ikesas"]["half-open"]}"
+
+puts "ikesa_server_version.label Strongswan Ver: #{sock.version["version"]}"
