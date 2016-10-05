@@ -31,8 +31,8 @@ puts "active_low.label Active_low"
 puts "active_low.min 0"
 puts "active_low.draw AREA"
 
-puts "active_critical.value #{stats_json["active"]["critical"]}"
-puts "active_high.value #{stats_json["active"]["high"]}"
-puts "active_medium.value #{stats_json["active"]["medium"]}"
-puts "active_low.value #{stats_json["active"]["low"]}"
+puts "active_critical.value #{stats_json["workers"]["active"]["critical"]}"
+puts "active_high.value #{stats_json["workers"]["active"]["high"]}"
+puts "active_medium.value #{stats_json["workers"]["active"]["medium"]}"
+puts "active_low.value #{stats_json["workers"]["active"]["low"]}"
 
