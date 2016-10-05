@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require "vici"
+require "socket"
+
+# By default socket path "/var/run/charon.vici"
+# Vici::Connection.new(UNIXSocket.new("/var/run/charon.vici"))
+sock = Vici::Connection.new()
+
+stats_json = sock.stats
+
+puts "graph_title Strongswan_active_workers"
+puts "graph_category ipsec"
+puts "graph_vlabel active workers"
+puts "graph_info This graph monitors the active workers"
+
+puts "active_critical.label Active_critical"
+puts "active_critical.min 0"
+puts "active_critical.draw AREA"
+
+puts "active_high.label Active_high"
+puts "active_high.min 0"
+puts "active_high.draw AREA"
+
+puts "active_medium.label Active_medium"
+puts "active_medium.min 0"
+puts "active_medium.draw AREA"
+
+puts "active_low.label Active_low"
+puts "active_low.min 0"
+puts "active_low.draw AREA"
+
+puts "active_critical.value #{stats_json["active"]["critical"]}"
+puts "active_high.value #{stats_json["active"]["high"]}"
+puts "active_medium.value #{stats_json["active"]["medium"]}"
+puts "active_low.value #{stats_json["active"]["low"]}"
+
