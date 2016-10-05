@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require "vici"
+require "socket"
+
+# By default socket path "/var/run/charon.vici"
+# Vici::Connection.new(UNIXSocket.new("/var/run/charon.vici"))
+sock = Vici::Connection.new()
+
+stats_json = sock.stats
+
+puts "graph_title Strongswan workers"
+puts "graph_category ipsec"
+puts "graph_vlabel workers_count"
+puts "graph_info This graph monitors the strongswan workers rate"
+
+puts "ikesa_total.label workers_total"
+puts "ikesa_total.min 0"
+puts "ikesa_total.draw AREA"
+
+puts "ikesa_half_open.label workers_idle"
+puts "ikesa_half_open.min 0"
+puts "ikesa_half_open.draw AREA"
+
+puts "workers_total.value #{stats_json["workers"]["total"]}"
+puts "workers_idle.value #{stats_json["workers"]["idle"]}"
+
