@@ -3,16 +3,20 @@
 require 'yaml'
 require "vici"
 require "socket"
+require "date"
 
 # By default socket path "/var/run/charon.vici"
 # Vici::Connection.new(UNIXSocket.new("/var/run/charon.vici"))
 sock = Vici::Connection.new()
 
-uptime = sock.stats["uptime"]["running"].split(' ')
+since = DateTime.parse(sock.stats["uptime"]["since"])
+now = DateTime.now
+diff = now - since
+uptime = diff.to_f
 
 puts "graph_title Strongswan ipsec uptime"
 puts "graph_category ipsec"
-puts "graph_vlabel uptime #{ uptime[1] }"
+puts "graph_vlabel uptime days"
 puts "graph_info This graph monitors the uptime"
 
 puts "uptime.label Uptime"
@@ -20,4 +24,4 @@ puts "uptime.min 0"
 puts "uptime.draw AREA"
 
 
-puts "uptime.value #{ uptime[0] }"
+puts "uptime.value #{ uptime }"
